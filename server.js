@@ -33,7 +33,15 @@ app.get('/api/quotes', (req, res, next) => {
     }
 })
 
-
+app.post('/api/quotes', (req, res, next) => {
+    const obj = req.query
+    if (obj.quote && obj.person) {
+        quotes.push(obj)
+        res.send({quote: obj})
+    } else {
+        res.status(400).send('Quote and person are required');
+    }
+})
 
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
 
